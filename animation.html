@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+</head>
+<body>
+  <script src="./pixi/pixi.4.3.2.js"></script>
+  <script src="./pixi/spriteUtilities.js"></script>
+  <script type="text/javascript">
+    let type = "WebGL";
+    if (!PIXI.utils.isWebGLSupported()) {
+      type = "canvas";
+    }
+
+    let Container = PIXI.Container,
+      autoDetectRenderer = PIXI.autoDetectRenderer,
+      loader = PIXI.loader,
+      resources = PIXI.loader.resources,
+      Sprite = PIXI.Sprite,
+      TextureCache = PIXI.utils.TextureCache,
+      Graphics = PIXI.Graphics,
+      Text = PIXI.Text,
+      Texture = PIXI.Texture,
+      Rectangle = PIXI.Rectangle;
+
+    let stage = new Container(), 
+      renderer = autoDetectRenderer(512, 512);
+    
+    document.body.appendChild(renderer.view);
+    let su = new SpriteUtilities(PIXI);
+    loader
+      .add('treasure-tileset', './images/treasure-tileset.png') 
+      .load(setup);
+let treasure_tileset
+    function setup() {
+      let frames = su.filmstrip("treasure-tileset", 32, 32);
+      treasure_tileset = su.sprite(frames)
+      treasure_tileset.vx = 0;
+      treasure_tileset.vy = 0;
+      treasure_tileset.position.set(32, 32);
+      stage.addChild(treasure_tileset)
+      treasure_tileset.fps = 12
+      treasure_tileset.states = {
+        down: 131,    
+        left: 147,   
+        right: 163, 
+        up: 179,
+        walkDown: [131,133],
+        walkLeft: [147,149],
+        walkRight: [163, 165],
+        walkUp: [179, 181]
+      };  
+      var left = keyboard(37),  up = keyboard(38),
+      right = keyboard(39), down = keyboard(40);
+      
+      left.press = () =>{
+      treasure_tileset.playAnimation(treasure_tileset.states.walkLeft);
+      treasure_tileset.vx = -5;
+      treasure_tileset.vy = 0;
+      }
+      left.release = () => {
+        if (!right.isDown && treasure_tileset.vy === o) {
+          treasure_tileset.vx = o;
+          treasure_tileset.show(treasure_tileset.states.left);
+        }
+      }
+      up.press = () => {
+        treasure_tileset.playAnimation(treasure_tileset.states.walkUp);
+        treasure_tileset.vy = -5;
+        treasure_tileset.vx = 0;
+      };
+      up.release = () => {
+        if (!down.isDown && treasure_tileset.vx === o) {
+          treasure_tileset.vy = o;
+          treasure_tileset.show(treasure_tileset.states.up);
+        }
+      };
+      //Right
+      right.press = () => {
+        treasure_tileset.playAnimation(treasure_tileset.states.walkRight);
+        treasure_tileset.vx = 5;
+        treasure_tileset.vy = 0;
+      };
+
+      right.release = () => {
+        if (!left.isDown && treasure_tileset.vy === o) {
+          treasure_tileset.vx = 0;
+          treasure_tileset.show(treasure_tileset.states.right);
+        }
+      }
+      //Down
+      down.press = () => {
+        treasure_tileset.playAnimation(treasure_tileset.states.walkDown);
+        treasure_tileset.vy = 5;
+        treasure_tileset.vx = 0;
+      };
+      down.release = () => {
+        if (!up.isDown && treasure_tileset.vx === o) {
+          treasure_tileset.vy = 0;
+          treasure_tileset.show(treasure_tileset.states.down);
+        }
+      };
+      //Start the game looр
+      gameLoop();
+    }
+
+
+
+    function gameLoop(){
+      requestAnimationFrame(gameLoop);
+      play()
+      renderer.render(stage);
+    }
+    function play(){
+      treasure_tileset.x += treasure_tileset.vx
+      treasure_tileset.y += treasure_tileset.vy
+    }
+
+    function keyboard(keyCode){
+      let key = {}
+      key.code = keyCode
+      key.isDown = false
+      key.isUp = true
+      key.press = undefined
+      key.release = undefined
+      key.downHandler = event =>{
+        if(event.keyCode === key.code){
+          if(key.isUp && key.release) key.press()
+          key.isDown = true
+          key.isUp = false
+        }
+        event.preventDefault();
+      }
+      key.upHandler = event =>{
+        if(event.keyCode === key.code){
+          if(key.isDown && key.release) key.press()
+          key.isDown = false
+          key.isUp = true
+        }
+        event.preventDefault();
+      }
+      window.addEventListener(
+        'keydown', key.downHandler.bind(key), false
+      )
+      window.addEventListener(
+        'keyup', key.upHandler.bind(key), false
+      )
+      return key
+    }
+
+    /*    function setup() {
+      let frames = su.filmstrip("treasure-tileset", 32, 32);
+      
+      let states = {
+        down: 131,    
+        left: 147,   
+        right: 163, 
+        up: 179,
+        wolkDown: [131,133],
+        wolkLeft: [147,149],
+        wolkRight: [163, 165],
+        wolkUp: [179, 181]
+      };
+
+      left.press=()=>{
+        let treasure_tileset_left = new Sprite(frames[states.left]);
+      }
+
+      
+      let treasure_tileset_left = new Sprite(frames[states.up]);
+      sprite.x = 100;
+      sprite.y = 100;
+      stage.addChild(sprite);
+      
+      gameLoop();
+    }
+
+    function gameLoop(){
+      requestAnimationFrame(gameLoop);
+      renderer.render(stage);
+    }*/
+  </script>
+</body>
+</html>

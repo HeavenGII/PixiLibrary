@@ -1,0 +1,106 @@
+{
+  "frames": {
+    "explorer0.png": {
+      "frame": { "x": 0, "y": 256, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer1.png": {
+      "frame": { "x": 32, "y": 256, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer2.png": {
+      "frame": { "x": 64, "y": 256, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer3.png": {
+      "frame": { "x": 0, "y": 288, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer4.png": {
+      "frame": { "x": 32, "y": 288, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer5.png": {
+      "frame": { "x": 64, "y": 288, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer6.png": {
+      "frame": { "x": 0, "y": 320, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer7.png": {
+      "frame": { "x": 32, "y": 320, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer8.png": {
+      "frame": { "x": 64, "y": 320, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer9.png": {
+      "frame": { "x": 0, "y": 352, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer10.png": {
+      "frame": { "x": 32, "y": 352, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    },
+    "explorer11.png": {
+      "frame": { "x": 64, "y": 352, "w": 32, "h": 32 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+      "sourceSize": { "w": 32, "h": 32 },
+      "pivot": { "x": 0.5, "y": 0.5 }
+    }
+  },
+  "meta": {
+    "version": "1.0",
+    "image": "treasure-tileset.png",
+    "format": "RGBA8888",
+    "scale": "1"
+  }
+}
