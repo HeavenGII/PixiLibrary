@@ -33,7 +33,7 @@ loader
 	.load(onAssetsLoaded);
 
 var reel1
-let elementWidth = 198, elementHight = 168, reelElement, reelElementsTexture;
+let elementWidth = 198, elementHeight = 168, reelElement, reelElementsTexture;
 
 function onAssetsLoaded() 
 {
