@@ -52,18 +52,22 @@ Reel.prototype.init = function()
 		this.reelElements.push(reelElement)
 		n++;
 	}
-	this.continue = n;
-};
+	this.continue = this.reelstrip.length-n-1;
+
+}
 
 Reel.prototype.spin = function() {  
 	this.reelElements.forEach(element => {
-		element.y+=20
+		element.y+=1
 		if(element.y > this.startHeightElement + elementHeight * 3) {
-			this.continue++
+			console.log(this.continue)
+
             element.y = this.startHeightElement - elementHeight
-            element.texture = reelElementsTexture[this.reelstrip[this.reelstrip.length - this.continue]];
-            if(this.continue == 16){
-				this.continue = 0
+            element.texture = reelElementsTexture[this.reelstrip[this.continue%this.reelstrip.length]];
+			if(this.continue === 0){
+				this.continue = this.reelstrip.length-1
+			} else {
+				this.continue--
 			}
         }
 	})
