@@ -75,6 +75,7 @@ loader
 
 var reel1
 let elementWidth = 198, elementHeight = 168, reelElement, reelElementsTexture, buttonTextures;
+let button 
 
 function onAssetsLoaded() 
 {
@@ -86,36 +87,11 @@ function init() {
     reel1.init();
     stage.addChild(reel1);
 
-	let buttonContainer = new PIXI.Container()
-	stage.addChild(buttonContainer)
-	let texture = resources['button_elements'].texture;
-	let arrButtonElem = []
-	for(let i = 0; i<2; i++){
-		arrButtonElem.push(new PIXI.Rectangle(120*i, 0, 120, 120))
-	}
-	buttonTextures = arrButtonElem.map(frame=>{
-		let element = new PIXI.Texture(texture)
-		element.frame = frame
-		return element
-	})
-	let button = new PIXI.Sprite(buttonTextures[0])
-	button.buttonMode = true;
-	button.interactive = true
-	button.position.set(reel1.width/2+reel1.width/3,(reel1.height-button.height)/2)
-	button.on('tap', ()=>{
-		console.log('hello')
-	})
-	// let spin = new PIXI.Sprite(resources['spin'].texture)
-	// spin.position.set(reel1.width/6*5+9,(reel1.height-spin.height)/2)
-	// buttonContainer.addChild(spin)
-
-	buttonContainer.addChild(button)
-    ticker = PIXI.ticker.shared;
-    ticker.add(render);
+	renderer.render(stage);
 }
 
-function render()
+function render(delta)
 {
 	reel1.spin()
-	renderer.render(stage);
-};
+	renderer.render(stage)
+}

@@ -15,6 +15,7 @@ function Reel(strip1, strip2, strip3)
 	this.reelcontinue2 = null;
 	this.reelcontinue3 = null;
 	this.widthBySqureOfMask = null;
+	this.heightBySqureOfMask = null;
 	this.reelContentContainer = new PIXI.Container();
 }
 Reel.prototype = Object.create(PIXI.Container.prototype);
@@ -53,6 +54,8 @@ Reel.prototype.init = function()
 	cube.drawRect(this.startWidthElement, this.startHeightElement, elementWidth*3+10*2+1, elementHeight*3);
 	cube.endFill();
 	this.widthBySqureOfMask = cube.width/3-7
+	this.heightBySqureOfMask = cube.height/3
+	console.log(this.heightBySqureOfMask)
 
 	this.addChild(bgr)
 	this.addChild(reelPanel)
@@ -89,47 +92,208 @@ Reel.prototype.init = function()
 	this.reelcontinue2 = this.reelstrip2.length - n2 - 9
 	this.reelcontinue3 = this.reelstrip3.length - n3 - 13
 
+	let buttonContainer = new PIXI.Container()
+	this.addChild(buttonContainer)
+	let textureButn = resources['button_elements'].texture;
+	let arrButtonElem = []
+	for(let i = 0; i<2; i++){
+		arrButtonElem.push(new PIXI.Rectangle(120*i, 0, 120, 120))
+	}
+	buttonTextures = arrButtonElem.map(frame=>{
+		let element = new PIXI.Texture(textureButn)
+		element.frame = frame
+		return element
+	})
+	button = new PIXI.Sprite(buttonTextures[0])
+	button.buttonMode = true
+	button.interactive = true
+	button.position.set(reel1.width/2+reel1.width/3,(reel1.height-button.height)/2)
+
+	button.on('mouseup', ()=>{
+		button.texture = buttonTextures[1]
+
+		setTimeout(()=>{
+			button.texture = buttonTextures[0]
+		}, 100)
+		reel1.spin()
+
+	})
+	let spin = new PIXI.Sprite(resources['spin'].texture)
+	spin.position.set(reel1.width/6*5+9,(reel1.height-spin.height)/2)
+
+	buttonContainer.addChild(button)
+	buttonContainer.addChild(spin)
+
+
 }
 
-Reel.prototype.spin = function() {  
-	this.reelElements1.forEach(element => {
-		element.y+=10
-		if(element.y > this.startHeightElement + elementHeight * 3) {
-            element.texture = reelElementsTexture[this.reelstrip1[this.reelcontinue1%this.reelstrip1.length]]
-			let diffWidth = (element.width - this.widthBySqureOfMask)/2
-			element.position.set(this.startWidthElement-diffWidth, this.startHeightElement- elementHeight)
-			if(this.reelcontinue1 === 0){
-				this.reelcontinue1 = this.reelstrip1.length-1
-			} else {
-				this.reelcontinue1--
-			}
-        }
-	})
-	this.reelElements2.forEach(element => {
-		element.y+=10
-		if(element.y > this.startHeightElement + elementHeight * 3) {
-            element.texture = reelElementsTexture[this.reelstrip2[this.reelcontinue2%this.reelstrip2.length]]
-			let diffWidth = (element.width - this.widthBySqureOfMask)/2
-			element.position.set(this.startWidthElement+this.widthBySqureOfMask+9-diffWidth, this.startHeightElement- elementHeight)
-			if(this.reelcontinue2 === 0){
-				this.reelcontinue2 = this.reelstrip2.length-1
-			} else {
-				this.reelcontinue2--
-			}
-        }
-	})
-	this.reelElements3.forEach(element => {
-		element.y+=10
-		if(element.y > this.startHeightElement + elementHeight * 3) {
-            element.texture = reelElementsTexture[this.reelstrip3[this.reelcontinue3%this.reelstrip3.length]]
-			let diffWidth = (element.width - this.widthBySqureOfMask)/2
-			element.position.set(this.startWidthElement+(this.widthBySqureOfMask+10)*2-diffWidth, this.startHeightElement- elementHeight)
-			if(this.reelcontinue3 === 0){
-				this.reelcontinue3 = this.reelstrip3.length-1
-			} else {
-				this.reelcontinue3--
-			}
-        }
-	})
+Reel.prototype.spin = function() {
+	if(this.ticker1){
+		this.ticker1.stop()
+		this.ticker1 = null;
+	}
+	this.ticker1 = PIXI.ticker.shared;
+	this.ticker2 = new PIXI.ticker.Ticker()
+	this.ticker3 = new PIXI.ticker.Ticker()
+	let changepos1 = true, isSpin1 = true, state1 = false
+	let changepos2 = true, isSpin2 = true, state2 = false
+	let changepos3 = true, isSpin3 = true, state3 = false
+	this.ticker1.add(()=>{
+		renderer.render(stage)
+		this.reelElements1.forEach(element => {
+			if(isSpin1){
+				element.y+=24
+				if(element.y >= this.startHeightElement + elementHeight * 3) {
+            		element.texture = reelElementsTexture[this.reelstrip1[this.RandomValue(this.reelstrip1)]]
+					let diffWidth = (element.width - this.widthBySqureOfMask)/2
+					element.position.set(this.startWidthElement-diffWidth, this.startHeightElement - this.heightBySqureOfMask)
+        		} setTimeout(()=>{
+					if(element.y != this.startHeightElement-this.heightBySqureOfMask ||
+					element.y != this.startHeightElement ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask*2)
+					{
+						element+=24
+					}
+					isSpin1 = false
+				}, 1150)
+			} else if(changepos1) {
 
-}  
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask+22 ||
+					element.y == this.startHeightElement+22 ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask+22 
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2+22){
+					element.y+=2
+				} else {
+					state1 = true
+					changepos1 = false
+				}
+			} else if(state1) {
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask ||
+					element.y == this.startHeightElement ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2){
+					element.y-=2
+				} else {
+					state1 = false
+				}
+			}
+		})
+	})
+	this.ticker1.start()
+
+
+	
+	this.ticker2.add(()=>{
+		renderer.render(stage)
+		this.reelElements2.forEach(element => {
+			if(isSpin2){
+				element.y+=24
+				if(element.y >= this.startHeightElement + elementHeight * 3) {
+            		element.texture = reelElementsTexture[this.reelstrip2[this.RandomValue(this.reelstrip2)]]
+					let diffWidth = (element.width - this.widthBySqureOfMask)/2
+					element.position.set(this.startWidthElement+this.widthBySqureOfMask+10-diffWidth, this.startHeightElement- this.heightBySqureOfMask )
+        		}
+				 setTimeout(()=>{
+					if(element.y != this.startHeightElement-this.heightBySqureOfMask ||
+					element.y != this.startHeightElement ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask*2)
+					{
+						element+=24
+					}
+					isSpin2 = false
+				}, 1500)
+			} else if(changepos2) {
+
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask+22 ||
+					element.y == this.startHeightElement+22 ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask+22 
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2+22){
+					element.y+=2
+				} else {
+					state2 = true
+					changepos2 = false
+				}
+			} else if(state2) {
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask ||
+					element.y == this.startHeightElement ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2){
+					element.y-=2
+				} else {
+					state2 = false
+				}
+			}
+		})
+	})
+	this.ticker2.start()
+
+	this.ticker3.add(()=>{
+		renderer.render(stage)
+		this.reelElements3.forEach(element => {
+			if(isSpin3){
+				element.y+=24
+				if(element.y >= this.startHeightElement + elementHeight * 3) {
+            		element.texture = reelElementsTexture[this.reelstrip3[this.RandomValue(this.reelstrip3)]]
+					let diffWidth = (element.width - this.widthBySqureOfMask)/2
+					element.position.set(this.startWidthElement+(this.widthBySqureOfMask+10)*2-diffWidth, this.startHeightElement- this.heightBySqureOfMask )
+        		} setTimeout(()=>{
+					if(element.y != this.startHeightElement-this.heightBySqureOfMask ||
+					element.y != this.startHeightElement ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask ||
+					element.y != this.startHeightElement+this.heightBySqureOfMask*2)
+					{
+						element+=24
+					}
+					isSpin3 = false
+				}, 1965)
+			} else if(changepos3) {
+
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask+30 ||
+					element.y == this.startHeightElement+30 ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask+30 
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2+30){
+					element.y+=2
+				} else {
+					state3 = true
+					changepos3 = false
+				}
+			} else if(state3) {
+				if(element.y == this.startHeightElement-this.heightBySqureOfMask ||
+					element.y == this.startHeightElement ||
+					element.y == this.startHeightElement+this.heightBySqureOfMask
+				){
+					return
+				}
+				if(element.y != this.startHeightElement+this.heightBySqureOfMask*2){
+					element.y-=2
+				} else {
+					state3 = false
+				}
+			}
+		})
+	})
+	this.ticker3.start()
+ 
+	return true
+}
+Reel.prototype.RandomValue = function(reelstrip){
+	return Math.floor(Math.random()*reelstrip.length)
+} 
+
