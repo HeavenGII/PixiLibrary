@@ -80,6 +80,10 @@ loader
 	.add('lemonAnim', './images/gsym_6/gsym_6_animation.png')
 	.add('cherryAnim', './images/gsym_7/gsym_7_animation.png')
 	.add('starAnim', './images/gsym_8/gsym_8_animation.png')
+	.add('logoline', './images/logo.png')
+	.add('paytable', './images/paytable.png')
+	.add('payline', './images/wfd.png')
+	.add('win_font', './images/win_font.fnt')
 	.load(onAssetsLoaded);
 
 const symbolAnimations = {
@@ -94,7 +98,8 @@ const symbolAnimations = {
     8: { name: 'star', textures: null }
 }
 var reel1
-let elementWidth = 198, elementHeight = 168, reelElement, reelElementsTexture, buttonTextures;
+let elementWidth = 198, elementHeight = 168, reelElement;
+let reelElementsTexture, buttonTextures, logoline, payline, paytable, text;
 let arrMelonAnimTextures;
 let button 
 
@@ -108,7 +113,6 @@ function init() {
     reel1 = new Reel(reelstrip1, reelstrip2, reelstrip3);
     reel1.init();
     stage.addChild(reel1);
-
 	renderer.render(stage);
 }
 

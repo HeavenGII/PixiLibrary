@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+   <font>
+       <info aa='1' size='50' smooth='1' stretchH='100' bold='0' padding='0,0,0,0' spacing='0,0' charset='' italic='0' unicode='0' face='win_font'/>
+       <common scaleW='317' packed='0' pages='1' lineHeight='50' scaleH='51' base='54'/>
+       <pages>
+            <page id='0' file='win_font.png'/>
+       </pages>
+        <chars count='13'>
+            <char xadvance='11' x='2' chnl='0' yoffset='0' y='2' xoffset='0' id='32' page='0' height='0' width='0'/>
+            <char xadvance='11' x='2' chnl='0' yoffset='32' y='34' xoffset='1' id='44' page='0' height='15' width='10'/>
+            <char xadvance='11' x='14' chnl='0' yoffset='31' y='33' xoffset='1' id='46' page='0' height='12' width='11'/>
+            <char xadvance='27' x='27' chnl='0' yoffset='0' y='2' xoffset='0' id='48' page='0' height='43' width='27'/>
+            <char xadvance='27' x='56' chnl='0' yoffset='1' y='2' xoffset='0' id='49' page='0' height='42' width='27'/>
+            <char xadvance='27' x='85' chnl='0' yoffset='0' y='2' xoffset='0' id='50' page='0' height='43' width='27'/>
+            <char xadvance='27' x='114' chnl='0' yoffset='0' y='2' xoffset='0' id='51' page='0' height='43' width='27'/>
+            <char xadvance='27' x='143' chnl='0' yoffset='1' y='2' xoffset='0' id='52' page='0' height='42' width='27'/>
+            <char xadvance='27' x='172' chnl='0' yoffset='1' y='2' xoffset='0' id='53' page='0' height='42' width='27'/>
+            <char xadvance='27' x='201' chnl='0' yoffset='0' y='2' xoffset='0' id='54' page='0' height='43' width='27'/>
+            <char xadvance='27' x='230' chnl='0' yoffset='1' y='2' xoffset='0' id='55' page='0' height='42' width='27'/>
+            <char xadvance='27' x='259' chnl='0' yoffset='0' y='2' xoffset='0' id='56' page='0' height='43' width='27'/>
+            <char xadvance='27' x='288' chnl='0' yoffset='0' y='2' xoffset='0' id='57' page='0' height='43' width='27'/>
+       </chars>
+   </font>
