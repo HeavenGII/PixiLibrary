@@ -4,8 +4,7 @@ if(totalWin != 0) {
         
         if (!reelInstance.winText) {
             reelInstance.winText = new PIXI.extras.BitmapText('0', {
-                font: '50px win_font',
-                align: 'center'
+                font: '50px win_font'
             })
             reelInstance.winText.position.set(reelInstance.bgr.width - 100, 50)
             reelInstance.addChild(reelInstance.winText)

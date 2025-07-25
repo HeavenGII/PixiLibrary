@@ -136,6 +136,25 @@ Reel.prototype.init = function()
 	this.addChild(paytable)
 	paytable.position.set((bgr.width/8-paytable.width/2), (bgr.height-paytable.height)/2)
 
+	const payvaluesContainer = new PIXI.Container()
+	this.addChild(payvaluesContainer)
+	payvaluesContainer.position.set(paytable.x, paytable.y)
+	const payouts = [40, 20, 16, 16, 2, 2, 2, 2, 50]
+	payouts.forEach((payout, i)=>{
+		const text = new PIXI.extras.BitmapText(
+			`${payout}`,
+			{
+ 				font: '50px win_font'
+			}
+		)
+		if(payout <10){
+			text.position.set(215, i*48.5+5)
+		} else {
+			text.position.set(200, i*48.5+5)
+		}
+        payvaluesContainer.addChild(text)
+	})
+
 	let logolineTexture = resources.logoline.texture
 	logoline = new PIXI.Sprite(logolineTexture)
 	this.addChild(logoline)
@@ -150,10 +169,10 @@ Reel.prototype.init = function()
 	this.winText = new PIXI.extras.BitmapText('0', {
 		font: '50px win_font',
 		align: 'center'
-	});
-	this.winText.position.set(610, 33);
-	this.addChild(this.winText);
-	this.winText.visible = false;
+	})
+	this.winText.position.set(610, 33)
+	this.addChild(this.winText)
+	this.winText.visible = false
 }
 
 Reel.prototype.spin = function() {
