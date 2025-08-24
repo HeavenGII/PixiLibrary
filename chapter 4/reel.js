@@ -116,14 +116,15 @@ Reel.prototype.init = function()
 	button.interactive = true
 	button.position.set(reel1.width/2+reel1.width/3,(reel1.height-button.height)/2)
 
-	button.on('mouseup', ()=>{
+	button.on('mousedown', ()=>{
 		if (this.isButtonLocked) return
 		button.texture = buttonTextures[1]
 		this.isButtonLocked = true
-		setTimeout(()=>{
-			button.texture = buttonTextures[0]
-		}, 100)
 		reel1.spin()
+	})
+	button.on(`mouseup`, ()=>{
+		button.texture = buttonTextures[0]
+		this.isButtonLocked = true
 	})
 	let spin = new PIXI.Sprite(resources.spin.texture)
 	spin.position.set(reel1.width/6*5+9,(reel1.height-spin.height)/2)
