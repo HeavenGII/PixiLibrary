@@ -10,7 +10,7 @@ function checkWin(reelInstance){
         const winningSymbol = reelInstance.arrCheckLines[0][0]
         console.log('Winning combination on top line with:', symbolAnimations[winningSymbol].name)
         
-        totalWin += PAYOUTS[winningSymbol];
+        totalWin += PAYOUTS[winningSymbol]
 
         const topY = reelInstance.startHeightElement
         
@@ -82,7 +82,7 @@ function checkWin(reelInstance){
         const winningSymbol = reelInstance.arrCheckLines[2][0]
         console.log('Winning combination on bottom line with:', symbolAnimations[winningSymbol].name)
 
-        totalWin += PAYOUTS[winningSymbol];
+        totalWin += PAYOUTS[winningSymbol]
 
         const bottomY = reelInstance.startHeightElement + reelInstance.heightBySqureOfMask * 2
 
@@ -105,7 +105,9 @@ function checkWin(reelInstance){
                 reelInstance.removeAnimation(anim1, anim1Element)
                 reelInstance.removeAnimation(anim2, anim2Element)
                 reelInstance.removeAnimation(anim3, anim3Element)
+                console.log('button check')
                 reelInstance.isButtonLocked = false
+                console.log('button false')
                 animTicker.stop()
             }, 4300)
         }
@@ -117,7 +119,7 @@ function checkWin(reelInstance){
         const winningSymbol = reelInstance.arrCheckLines[0][0]
         console.log('Winning combination on diagonal \\ with:', symbolAnimations[winningSymbol].name)
 
-        totalWin += PAYOUTS[winningSymbol];
+        totalWin += PAYOUTS[winningSymbol]
 
         const topLeftY = reelInstance.startHeightElement;
         const anim1Element = reelInstance.reelElements1.find(el => Math.abs(el.y - topLeftY) < 5)

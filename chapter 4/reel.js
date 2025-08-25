@@ -24,8 +24,8 @@ function Reel(strip1, strip2, strip3)
 	this.isButtonLocked = false
 
 }
-Reel.prototype = Object.create(PIXI.Container.prototype);
-Reel.prototype.constructor = Reel;
+Reel.prototype = Object.create(PIXI.Container.prototype)
+Reel.prototype.constructor = Reel
 
 Reel.prototype.init = function()
 {	
@@ -101,7 +101,7 @@ Reel.prototype.init = function()
 
 	let buttonContainer = new PIXI.Container()
 	this.addChild(buttonContainer)
-	let textureButn = resources['button_elements'].texture;
+	let textureButn = resources['button_elements'].texture
 	let arrButtonElem = []
 	for(let i = 0; i<2; i++){
 		arrButtonElem.push(new PIXI.Rectangle(120*i, 0, 120, 120))

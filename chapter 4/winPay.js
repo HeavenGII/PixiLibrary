@@ -36,7 +36,7 @@ if(totalWin != 0) {
                         maxValueShown = true
                         
                         setTimeout(() => {
-                            countingUp = false;
+                            countingUp = false
                         }, 500)
                     }
                 }
@@ -47,6 +47,9 @@ if(totalWin != 0) {
                     currentWin = 0
                     countingUp = null     
                     reelInstance.winText.visible = false
+                    setTimeout(() => {
+                        payline.visible = false
+                    }, 500)
                     reelInstance.winTicker.stop()
                 }
                 reelInstance.winText.text = currentWin.toString()
@@ -54,9 +57,5 @@ if(totalWin != 0) {
         })
         
         reelInstance.winTicker.start()
-        
-        setTimeout(() => {
-            payline.visible = false
-        }, 2000)
     }
 }
