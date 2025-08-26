@@ -49,7 +49,7 @@ if(totalWin != 0) {
                     reelInstance.winText.visible = false
                     setTimeout(() => {
                         payline.visible = false
-                    }, 500)
+                    }, 1000)
                     reelInstance.winTicker.stop()
                 }
                 reelInstance.winText.text = currentWin.toString()
